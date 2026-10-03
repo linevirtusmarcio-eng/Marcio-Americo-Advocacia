@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Márcio Américo Lopes Corrêa | OAB/MA 9.367</title>
+    <!-- Tailwind CSS para estruturação rápida e moderna -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cinzel (Gótico/Clássico) e Inter (Moderno) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0b0e;
+            color: #d1d5db;
+        }
+        h1, h2, h3, h4, .font-gothic {
+            font-family: 'Cinzel', serif;
+        }
+        /* Efeito de brilho gótico moderno */
+        .gothic-glow {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+        .gothic-border {
+            border-image: linear-gradient(to bottom, #d4af37, #4a4a4a, #111111) 1;
+        }
+        .card-gothic {
+            background: linear-gradient(135deg, #131318 0%, #08080a 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(212, 175, 55, 0.03);
+            transition: all 0.3s ease;
+        }
+        .card-gothic:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.08);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
+
+    <!-- CABEÇALHO & NAVEGAÇÃO -->
+    <header class="sticky top-0 z-50 bg-[#08080a]/90 backdrop-blur-md border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+            <!-- Logotipo / Nome -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-12 h-12 rounded-full border border-amber-500/50 flex items-center justify-center bg-[#131318] shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+                    <i class="fa-solid fa-scale-balanced text-amber-400 text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-gothic font-bold text-lg sm:text-xl tracking-wider text-amber-100 block">MÁRCIO AMÉRICO</span>
+                    <span class="text-xs tracking-widest text-amber-500/80 uppercase">OAB/MA 9.367</span>
+                </div>
+            </div>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn text-amber-400 transition-colors duration-200 hover:text-amber-300 pb-1 border-b-2 border-amber-400">Início</button>
+                <button onclick="switchTab('perfil')" id="nav-perfil" class="nav-btn text-gray-400 transition-colors duration-200 hover:text-amber-300 pb-1 border-b-2 border-transparent">Perfil</button>
+                <button onclick="switchTab('areas')" id="nav-areas" class="nav-btn text-gray-400 transition-colors duration-200 hover:text-amber-300 pb-1 border-b-2 border-transparent">Atuação</button>
+                <button onclick="switchTab('artigos')" id="nav-artigos" class="nav-btn text-gray-400 transition-colors duration-200 hover:text-amber-300 pb-1 border-b-2 border-transparent">Artigos</button>
+                <button onclick="switchTab('contato')" id="nav-contato" class="nav-btn text-gray-400 transition-colors duration-200 hover:text-amber-300 pb-1 border-b-2 border-transparent">Contato</button>
+            </nav>
+
+            <!-- Ação Rápida WhatsApp (Desktop) -->
+            <div class="hidden lg:block">
+                <a href="https://wa.me/5598988001742" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-semibold px-5 py-2.5 rounded text-sm shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:brightness-110 transition-all">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Plantão WhatsApp</span>
+                </a>
+            </div>
+
+            <!-- Botão Menu Mobile -->
+            <div class="md:hidden flex items-center">
+                <button onclick="toggleMobileMenu()" class="text-amber-400 focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#131318] border-b border-amber-500/20 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded text-amber-400 hover:bg-black/40">Início</button>
+            <button onclick="switchTab('perfil'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded text-gray-300 hover:bg-black/40">Perfil</button>
+            <button onclick="switchTab('areas'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded text-gray-300 hover:bg-black/40">Áreas de Atuação</button>
+            <button onclick="switchTab('artigos'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded text-gray-300 hover:bg-black/40">Artigos Jurídicos</button>
+            <button onclick="switchTab('contato'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded text-gray-300 hover:bg-black/40">Contato & Localização</button>
+            <div class="pt-2">
+                <a href="https://wa.me/5598988001742" target="_blank" class="block text-center bg-amber-500 text-black font-semibold py-2 rounded">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp (98) 98800-1742
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL (SUBPÁGINAS) -->
+    <main class="flex-grow">
+
+        <!-- ================= SUBPÁGINA: INÍCIO ================= -->
+        <section id="tab-home" class="tab-content">
+            <!-- Hero Section -->
+            <div class="relative overflow-hidden py-24 sm:py-32 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-[#0b0b0e] to-black border-b border-amber-500/10">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs tracking-widest uppercase mb-6">
+                        <i class="fa-solid fa-shield-halved">></i> Excelência e Rigor Técnico
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-gothic text-white tracking-tight gothic-glow mb-6">
+                        Tradição Jurídica com <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Visão Moderna</span>
+                    </h1>
+                    <p class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-400 mb-10">
+                        Atuação firme, pautada em mais de 16 anos de experiência e rigor metodológico na defesa de seus direitos em São Bento e região.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="switchTab('contato')" class="bg-amber-500 text-black font-bold px-8 py-4 rounded shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:bg-amber-400 transition-all">
+                            Agendar Atendimento
+                        </button>
+                        <button onclick="switchTab('perfil')" class="border border-amber-500/40 text-amber-300 font-semibold px-8 py-4 rounded hover:bg-amber-500/10 transition-all">
+                            Conhecer o Advogado
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destaques / Diferenciais -->
+            <div class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-gothic text-white mb-3">Pilares da Advocacia</h2>
+                    <div class="w-24 h-0.5 bg-amber-500 mx-auto"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card-gothic p-8 rounded-lg relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-4 text-amber-500/10 text-6xl font-gothic group-hover:text-amber-500/20 transition-colors">01</div>
+                        <i class="fa-solid fa-balance-scale text-amber-400 text-3xl mb-4"></i>
+                        <h3 class="text-xl font-gothic text-amber-200 mb-2">Fundamentação Rigorosa</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Petições construídas com base estrita na legislação vigente, silogismo jurídico e padrões metodológicos avançados.</p>
+                    </div>
+                    <div class="card-gothic p-8 rounded-lg relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-4 text-amber-500/10 text-6xl font-gothic group-hover:text-amber-500/20 transition-colors">02</div>
+                        <i class="fa-solid fa-user-shield text-amber-400 text-3xl mb-4"></i>
+                        <h3 class="text-xl font-gothic text-amber-200 mb-2">Atendimento Dedicado</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Escritório boutique centrado na atenção personalizada e acompanhamento transparente de cada caso estratégico.</p>
+                    </div>
+                    <div class="card-gothic p-8 rounded-lg relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-4 text-amber-500/10 text-6xl font-gothic group-hover:text-amber-500/20 transition-colors">03</div>
+                        <i class="fa-solid fa-city text-amber-400 text-3xl mb-4"></i>
+                        <h3 class="text-xl font-gothic text-amber-200 mb-2">Raízes em São Bento - MA</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Conhecimento profundo do foro local e comprometimento absoluto com a justiça na comarca e estado do Maranhão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SUBPÁGINA: PERFIL PROFISSIONAL ================= -->
+        <section id="tab-perfil" class="tab-content hidden py-20">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-amber-500 text-xs tracking-widest uppercase font-semibold">Trajetória e Credibilidade</span>
+                    <h2 class="text-3xl sm:text-4xl font-gothic text-white mt-1 mb-3">Dr. Márcio Américo Lopes Corrêa</h2>
+                    <div class="w-24 h-0.5 bg-amber-500 mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                    <!-- Coluna do Card de Apresentação -->
+                    <div class="card-gothic p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-6 rounded-full border-2 border-amber-500 p-1 bg-[#0b0b0e] flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                            <i class="fa-solid fa-user-tie text-amber-400 text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-gothic text-white">Márcio Américo</h3>
+                        <p class="text-amber-400 text-sm font-medium mt-1">OAB/MA nº 9.367</p>
+                        <div class="mt-6 pt-6 border-t border-amber-500/20 text-left space-y-3 text-sm text-gray-300">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-award text-amber-500 w-5"></i>
+                                <span>+16 Anos de Experiência</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-location-dot text-amber-500 w-5"></i>
+                                <span>São Bento - Maranhão</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-envelope text-amber-500 w-5"></i>
+                                <span class="truncate">marcio_americo.adv@hotmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna da Biografia Detalhada -->
+                    <div class="lg:col-span-2 space-y-6 text-gray-300 leading-relaxed">
+                        <div class="card-gothic p-8 rounded-lg space-y-4">
+                            <h3 class="text-2xl font-gothic text-amber-200">Compromisso com a Justiça e a Técnica</h3>
+                            <p>
+                                Com mais de 16 anos dedicados à prática jurídica, o Dr. Márcio Américo Lopes Corrêa consolidou seu escritório em São Bento, Maranhão, como um bastião de defesa rigorosa dos direitos de seus clientes.
+                            </p>
+                            <p>
+                                Registrado sob a ordem <strong>OAB/MA 9.367</strong>, sua atuação é pautada pelo apuro técnico, utilizando argumentação silogística fundamentada e estrito respeito às normativas processuais e constitucionais. Cada causa é tratada com dedicação artesanal, unindo a sabedoria da tradição jurídica às ferramentas analíticas modernas.
+                            </p>
+                            <div class="pt-4 flex flex-wrap gap-4">
+                                <a href="https://wa.me/5598988001742" target="_blank" class="inline-flex items-center gap-2 bg-amber-500 text-black font-semibold px-4 py-2 rounded text-sm hover:bg-amber-400 transition-colors">
+                                    <i class="fa-brands fa-whatsapp"></i> Falar com o Doutor
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SUBPÁGINA: ÁREAS DE ATUAÇÃO ================= -->
+        <section id="tab-areas" class="tab-content hidden py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-amber-500 text-xs tracking-widest uppercase font-semibold">Especialidades</span>
+                    <h2 class="text-3xl sm:text-4xl font-gothic text-white mt-1 mb-3">Áreas de Atuação Jurídica</h2>
+                    <div class="w-24 h-0.5 bg-amber-500 mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Área 1 -->
+                    <div class="card-gothic p-8 rounded-lg flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 text-xl">
+                                <i class="fa-solid fa-gavel"></i>
+                            </div>
+                            <h3 class="text-xl font-gothic text-amber-200 mb-3">Direito Civil</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">Contratos, responsabilidade civil, indenizações, litígios possessórios e soluções patrimoniais com total segurança jurídica.</p>
+                        </div>
+                        <button onclick="switchTab('contato')" class="text-amber-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-amber-300">
+                            Consultar sobre este tema <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Área 2 -->
+                    <div class="card-gothic p-8 rounded-lg flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 text-xl">
+                                <i class="fa-solid fa-file-contract"></i>
+                            </div>
+                            <h3 class="text-xl font-gothic text-amber-200 mb-3">Direito de Família & Sucessões</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">Divórcios, guarda, pensão alimentícia, inventários e partilhas conduzidos com discrição, sensibilidade e rigor legal.</p>
+                        </div>
+                        <button onclick="switchTab('contato')" class="text-amber-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-amber-300">
+                            Consultar sobre este tema <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Área 3 -->
+                    <div class="card-gothic p-8 rounded-lg flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 text-xl">
+                                <i class="fa-solid fa-landmark"></i>
+                            </div>
+                            <h3 class="text-xl font-gothic text-amber-200 mb-3">Direito Administrativo & Público</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">Defesa em processos administrativos, concursos públicos, servidores e relações com órgãos estatais e municipais.</p>
+                        </div>
+                        <button onclick="switchTab('contato')" class="text-amber-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-amber-300">
+                            Consultar sobre este tema <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SUBPÁGINA: ARTIGOS & PUBLICAÇÕES ================= -->
+        <section id="tab-artigos" class="tab-content hidden py-20">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-amber-500 text-xs tracking-widest uppercase font-semibold">Doutrina e Reflexão</span>
+                    <h2 class="text-3xl sm:text-4xl font-gothic text-white mt-1 mb-3">Artigos & Publicações Jurídicas</h2>
+                    <div class="w-24 h-0.5 bg-amber-500 mx-auto"></div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Artigo 1 -->
+                    <div class="card-gothic p-6 sm:p-8 rounded-lg">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <span class="text-xs text-amber-400 bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20">Direito Processual</span>
+                            <span class="text-xs text-gray-500">Outubro, 2026</span>
+                        </div>
+                        <h3 class="text-xl font-gothic text-white mb-2">O Rigor da Fundamentação Silogística nas Petições Contemporâneas</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Reflexão sobre a importância do método dedutivo clássico na argumentação forense e como a precisão textual fortalece o convencimento do magistrado.
+                        </p>
+                        <span class="text-amber-400 text-sm font-medium inline-flex items-center gap-2">
+                            Leitura Técnica Recomendada <i class="fa-solid fa-book-open text-xs"></i>
+                        </span>
+                    </div>
+
+                    <!-- Artigo 2 -->
+                    <div class="card-gothic p-6 sm:p-8 rounded-lg">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <span class="text-xs text-amber-400 bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20">Segurança Jurídica</span>
+                            <span class="text-xs text-gray-500">Setembro, 2026</span>
+                        </div>
+                        <h3 class="text-xl font-gothic text-white mb-2">A Estabilidade das Decisões e a Proteção ao Cidadão no Âmbito Local</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Análise crítica sobre a aplicação da jurisprudência consolidada nas comarcas do interior maranhense e os desafios da efetividade jurisdicional.
+                        </p>
+                        <span class="text-amber-400 text-sm font-medium inline-flex items-center gap-2">
+                            Leitura Técnica Recomendada <i class="fa-solid fa-book-open text-xs"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SUBPÁGINA: CONTATO & LOCALIZAÇÃO ================= -->
+        <section id="tab-contato" class="tab-content hidden py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-amber-500 text-xs tracking-widest uppercase font-semibold">Canais Oficiais</span>
+                    <h2 class="text-3xl sm:text-4xl font-gothic text-white mt-1 mb-3">Contato & Localização</h2>
+                    <div class="w-24 h-0.5 bg-amber-500 mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Informações de Contato -->
+                    <div class="space-y-6">
+                        <div class="card-gothic p-8 rounded-lg space-y-6">
+                            <h3 class="text-2xl font-gothic text-amber-200">Escritório de Advocacia</h3>
+                            <p class="text-gray-300 text-sm">
+                                Agende uma consulta ou tire suas dúvidas através dos canais diretos do escritório. Atendimento personalizado para São Bento e região.
+                            </p>
+
+                            <div class="space-y-4 pt-2">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-semibold text-white">Endereço</h4>
+                                        <p class="text-sm text-gray-400">Praça de Eventos, São Bento - Maranhão</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-semibold text-white">WhatsApp</h4>
+                                        <p class="text-sm text-gray-400">(98) 98800-1742</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-semibold text-white">E-mail Profissional</h4>
+                                        <p class="text-sm text-gray-400">marcio_americo.adv@hotmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4">
+                                <a href="https://wa.me/5598988001742" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-bold py-3 px-6 rounded shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:brightness-110 transition-all">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Iniciar Conversa no WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulário de Mensagem Direta -->
+                    <div class="card-gothic p-8 rounded-lg">
+                        <h3 class="text-2xl font-gothic text-amber-200 mb-6">Envie sua Mensagem</h3>
+                        <form onsubmit="handleSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Seu Nome</label>
+                                <input type="text" required class="w-full bg-[#0b0b0e] border border-amber-500/30 rounded p-3 text-white text-sm focus:outline-none focus:border-amber-400" placeholder="Nome completo">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Telefone / WhatsApp</label>
+                                <input type="text" required class="w-full bg-[#0b0b0e] border border-amber-500/30 rounded p-3 text-white text-sm focus:outline-none focus:border-amber-400" placeholder="(98) 99999-9999">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Assunto / Dúvida Jurídica</label>
+                                <textarea rows="4" required class="w-full bg-[#0b0b0e] border border-amber-500/30 rounded p-3 text-white text-sm focus:outline-none focus:border-amber-400" placeholder="Descreva brevemente seu caso..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-amber-500 text-black font-bold py-3 rounded hover:bg-amber-400 transition-colors">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="bg-[#050507] border-t border-amber-500/20 py-12 text-center text-gray-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <div class="font-gothic text-amber-400 font-bold text-base tracking-wider">
+                DR. MÁRCIO AMÉRICO LOPES CORRÊA
+            </div>
+            <p>OAB/MA 9.367 • São Bento, Maranhão</p>
+            <p class="text-xs text-gray-600">© 2026 Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE NAVEGAÇÃO ENTRE SUBPÁGINAS -->
+    <script>
+        function switchTab(tabId) {
+            // Esconde todas as seções
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+            // Mostra a seção selecionada
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+            }
+
+            // Atualiza os estilos dos botões do menu desktop
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-amber-400', 'border-amber-400');
+                btn.classList.add('text-gray-400', 'border-transparent');
+            });
+
+            const currentNav = document.getElementById('nav-' + tabId);
+            if (currentNav) {
+                currentNav.classList.remove('text-gray-400', 'border-transparent');
+                currentNav.classList.add('text-amber-400', 'border-amber-400');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Mensagem simulada com sucesso! Para atendimento imediato, utilize o WhatsApp do escritório.');
+        }
+    </script>
+</body>
+</html>
